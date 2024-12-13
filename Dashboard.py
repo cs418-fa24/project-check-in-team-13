@@ -24,7 +24,7 @@ tickers = {
     "Tech": ["AAPL", "MSFT", "GOOGL", "NVDA", "META"],
     "Healthcare": ["JNJ", "PFE", "MRK", "ABBV", "UNH"],
     "Energy": ["XOM", "CVX", "COP", "SLB", "BP"],
-    "Index": ["^GSPC", "^IXIC", "^DJI", "^VIX"],
+    "Index": ["^GSPC", "^IXIC", "^DJI"],
 }
 
 @st.cache_data
@@ -61,20 +61,32 @@ if st.checkbox("Analyze Volatility and Anomalies"):
 
     @st.cache_resource
     def get_isolation_forest():
-        return IsolationForest(contamination=0.1, random_state=42)
-
+        contamination_rate = 0.1  
+        return IsolationForest(contamination=contamination_rate, random_state=42)
+    
     isolation_forest = get_isolation_forest()
     volatility_values = volatility.values
     isolation_forest.fit(volatility_values)
+
+    # Update anomaly detection logic
     volatility['Anomaly'] = isolation_forest.predict(volatility_values)
+
+    # Filter only high-volatility anomalies based on a threshold
+    volatility_threshold = 0.35 
+    high_volatility_anomalies = volatility[
+        (volatility['Anomaly'] == -1) & (volatility[selected_tickers] > volatility_threshold).any(axis=1)
+    ]
+    high_volatility_anomalies = high_volatility_anomalies.drop(columns='Anomaly')
 
     fig, ax = plt.subplots(figsize=(14, 7))
     for ticker in selected_tickers:
         ax.plot(volatility.index, volatility[ticker], label=ticker)
-        anomaly_points = volatility[volatility['Anomaly'] == -1]
-        ax.scatter(anomaly_points.index, anomaly_points[ticker], color='red', label=f"{ticker} Anomalies")
-    ax.set_title(f"{sector_choice} Sector Volatility with Anomalies")
+        if not high_volatility_anomalies.empty:
+            anomaly_points = high_volatility_anomalies.index
+            ax.scatter(anomaly_points, high_volatility_anomalies[ticker], color='red', label=f"{ticker} High Volatility Anomalies")
+    ax.set_title(f"{sector_choice} Sector Volatility with High Volatility Anomalies")
     ax.set_xlabel("Date")
     ax.set_ylabel("Volatility")
     ax.legend()
     st.pyplot(fig)
+
