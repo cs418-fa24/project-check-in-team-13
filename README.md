@@ -3,7 +3,7 @@
 
 # Stock Market Analysis 
 
-This project presents a comprehensive analysis of stock performance across various sectors and indices, visualizes trends around significant events, and detects anomalies in stock volatility. The deliverables are the final report and a streamlit dashboard (see below). Completed during the UIC Fall '24 course CS 418 under Prof. Sathya Ravi. 
+This project presents a comprehensive analysis of stock performance across various sectors and indices, visualizes trends around significant events, and detects anomalies in stock volatility, specifically focus on the periods of COVID-19 and the Russia-Ukraine War. The deliverables are the final report and a streamlit dashboard (see below). Completed during the UIC Fall '24 course CS 418 under Prof. Sathya Ravi. 
 
 ## Table of Contents
 
