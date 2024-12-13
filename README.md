@@ -9,11 +9,9 @@ This project presents a comprehensive analysis of stock performance across vario
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Dashboard](#Dashboard)
 - [Data](#data)
 - [Contributors](#contributors)
-- [License](#license)
 
 ## Introduction
 
@@ -25,29 +23,9 @@ The Stock Market Analysis Dashboard is designed to provide insights into the per
 - **Correlation Heatmap**: Display the correlation matrix of stocks within a sector to understand interdependencies.
 - **Volatility Analysis and Anomaly Detection**: Analyze stock volatility and detect anomalies using the Isolation Forest algorithm.
 
-## Run Dashboard
+## Dashboard
 
 View the Deployed dashboard [Here](https://dashboardfinalpy-dsproject.streamlit.app/)
-
-## Installation
-
-To run this project locally, follow these steps:
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/cs418-fa24/project-check-in-team-13.git
-   cd project-check-in-team-13
-   
-2. **Create a virtual environment (optional but recommended)**:
-     python -m venv venv
-     source venv/bin/activate   # On Windows: venv\Scripts\activate
-
-3. **Install the required dependencies**:
-   pip install -r requirements.txt
-
-4. Run DataScienceProject_FinalReport.ipynb for Report notebook
-                 OR
-   Run Dashboard_Final.py to open it on a localhosted streamlit dashboard
 
 ## Data
 
