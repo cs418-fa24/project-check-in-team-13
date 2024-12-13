@@ -89,4 +89,3 @@ if st.checkbox("Analyze Volatility and Anomalies"):
     ax.set_ylabel("Volatility")
     ax.legend()
     st.pyplot(fig)
-
